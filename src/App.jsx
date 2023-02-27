@@ -15,7 +15,12 @@ function App() {
   const validCard = (id, e) => {
     const cardNumCopy = [...cardNum];
     const indexOfCardNum = cardNumCopy.findIndex((i) => i.id === id);
-    cardNumCopy[indexOfCardNum].valid = !cardNumCopy[indexOfCardNum].valid;
+    if (cardNumCopy === cardNumCopy) {
+      cardNumCopy[indexOfCardNum].valid = true;
+    } else {
+      cardNumCopy[indexOfCardNum].valid = false;
+    }
+    // cardNumCopy[indexOfCardNum].valid = !cardNumCopy[indexOfCardNum].valid;
     localStorage.setItem("cardNum", JSON.stringify([...cardNumCopy]));
     setCardNum([...cardNumCopy]);
   };
