@@ -8,18 +8,24 @@ function App() {
   const addCardNum = (e) => {
     const newCardNum = { text: e.target.value, id: Date.now(), valid: false };
     setCardNum([newCardNum, ...cardNum]);
-    console.log(cardNum);
     e.target.value = "";
   };
 
   const validCard = (id, e) => {
     const cardNumCopy = [...cardNum];
+    const copyTwo = [];
+
     const indexOfCardNum = cardNumCopy.findIndex((i) => i.id === id);
-    if (cardNumCopy === cardNumCopy) {
-      cardNumCopy[indexOfCardNum].valid = true;
+    console.log(cardNumCopy[indexOfCardNum].text);
+    if (cardNumCopy) {
+      // push
+      indexOfCardNum % 2 === 0
+        ? copyTwo.push(cardNum[indexOfCardNum].value)
+        : copyTwo.push(cardNum[indexOfCardNum].value * 2);
     } else {
       cardNumCopy[indexOfCardNum].valid = false;
     }
+    console.log(copyTwo);
     // cardNumCopy[indexOfCardNum].valid = !cardNumCopy[indexOfCardNum].valid;
     localStorage.setItem("cardNum", JSON.stringify([...cardNumCopy]));
     setCardNum([...cardNumCopy]);
