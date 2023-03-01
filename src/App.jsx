@@ -12,20 +12,40 @@ function App() {
   };
 
   const validCard = (id, e) => {
-    const cardNumCopy = [...cardNum];
-    const copyTwo = [];
+    let cardNumCopy = [...cardNum];
+    let copyTwo = [];
+    let dubArray = [];
+    let digitArray = [];
 
     const indexOfCardNum = cardNumCopy.findIndex((i) => i.id === id);
-    console.log(cardNumCopy[indexOfCardNum].text);
-    if (cardNumCopy) {
-      // push
-      indexOfCardNum % 2 === 0
-        ? copyTwo.push(cardNum[indexOfCardNum].value)
-        : copyTwo.push(cardNum[indexOfCardNum].value * 2);
-    } else {
-      cardNumCopy[indexOfCardNum].valid = false;
+    let numText = cardNumCopy[indexOfCardNum].text;
+    // let parsedInt = parseInt(numText);
+    copyTwo = Array.from(String(numText), Number);
+    for (let i = 0; i < copyTwo.length; i++) {
+      if (i % 2 === 0) {
+        dubArray[i] = copyTwo[i] * 2;
+      } else {
+        dubArray[i] = copyTwo[i];
+      }
     }
-    console.log(copyTwo);
+    for (let num in dubArray) {
+      const numString = num.toString();
+      for (const digit of numString) {
+        digitArray.push(parseInt(digit));
+      }
+    }
+
+    let digitSum = digitArray.reduce(
+      (accumulator, current) => accumulator + current,
+      0
+    );
+    console.log(digitSum);
+
+    // for (let i = 0; i < dubArray.length; i++) {
+    //   digitArray.push(dubArray[i]);
+    // }
+    // console.log("digit array", digitArray);
+
     // cardNumCopy[indexOfCardNum].valid = !cardNumCopy[indexOfCardNum].valid;
     localStorage.setItem("cardNum", JSON.stringify([...cardNumCopy]));
     setCardNum([...cardNumCopy]);
